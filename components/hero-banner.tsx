@@ -1,27 +1,13 @@
 "use client"
 
 import { useState, useEffect, useCallback } from "react"
+import Image from "next/image"
 import { ChevronLeft, ChevronRight } from "lucide-react"
 
 const banners = [
-  {
-    title: "3/3 FECHAS DOBLES",
-    subtitle: "Ultimo dia",
-    offers: ["HASTA 50% OFF", "HASTA 12 CUOTAS 0% INTERES"],
-    bgGradient: "from-primary via-primary to-primary/80",
-  },
-  {
-    title: "OFERTAS IMPERDIBLES",
-    subtitle: "Solo hoy",
-    offers: ["HASTA 40% OFF", "ENVIO GRATIS"],
-    bgGradient: "from-secondary via-secondary to-secondary/80",
-  },
-  {
-    title: "TECNOLOGIA",
-    subtitle: "Los mejores precios",
-    offers: ["HASTA 30% OFF", "6 CUOTAS SIN INTERES"],
-    bgGradient: "from-ml-blue via-ml-blue to-ml-blue/80",
-  },
+  { image: "/prom1.jpg" },
+  { image: "/prom2.jpg" },
+  { image: "/prom3.jpg" },
 ]
 
 export default function HeroBanner() {
@@ -43,28 +29,17 @@ export default function HeroBanner() {
   const banner = banners[currentSlide]
 
   return (
-    <section className="relative overflow-hidden bg-primary" aria-label="Promociones destacadas">
-      <div className={`flex min-h-[280px] items-center justify-center px-4 py-12 transition-all duration-500 md:min-h-[340px] ${banner.bgGradient}`}>
-        <div className="mx-auto flex max-w-5xl flex-col items-center gap-4 text-center">
-          <span className="rounded-sm bg-ml-dark px-4 py-1 text-xs font-bold tracking-wider text-card">
-            {banner.title}
-          </span>
-          <h2 className="text-4xl font-black italic text-ml-dark md:text-6xl">
-            {banner.subtitle}
-          </h2>
-          <div className="flex flex-wrap items-center justify-center gap-4">
-            {banner.offers.map((offer, i) => (
-              <div
-                key={i}
-                className="rounded-lg border-2 border-ml-dark/30 bg-card/90 px-6 py-3 text-center shadow-sm"
-              >
-                <p className="text-lg font-extrabold text-ml-dark md:text-xl">
-                  {offer}
-                </p>
-              </div>
-            ))}
-          </div>
-        </div>
+    <section className="relative overflow-hidden" aria-label="Promociones destacadas">
+      <div className="relative min-h-[280px] md:min-h-[340px] w-full">
+        {"image" in banner && (
+          <Image
+            src={(banner as any).image}
+            alt="Promoción"
+            fill
+            className="object-cover"
+            priority
+          />
+        )}
       </div>
 
       {/* Controls */}
